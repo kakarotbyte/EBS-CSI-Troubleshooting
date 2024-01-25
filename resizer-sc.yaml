@@ -15,7 +15,7 @@ spec:
   storageClassName: resize-sc
   resources:
     requests:
-      storage: 4Gi
+      storage: 450Gi
 ---
 apiVersion: v1
 kind: Pod

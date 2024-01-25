@@ -20,5 +20,31 @@ echo "Installing kubectx"
 sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
 sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kctx
 sudo ln -s /opt/kubectx/kubens /usr/local/bin/kns
+sudo ln -s /usr/bin/terraform /usr/local/bin/t
+sudo ln -s /usr/bin/kubectl /usr/local/bin/k
 
+
+terraform init
+terraform apply -auto-approve
+
+echo "wait for cluster 1"
+aws eks wait cluster-active --name ebs-demo-1
+
+echo "adding kubeconfig"
+aws eks update-kubeconfig --name ebs-demo-1
+
+sleep 2
+
+echo "wait for cluster 1"
+aws eks wait cluster-active --name ebs-demo-2
+
+aws eks update-kubeconfig --name ebs-demo-2
+
+kubectl apply -f default-pod.yaml
+sleep 2
+aws eks wait cluster-active --name ebs-demo-3
+aws eks update-kubeconfig --name ebs-demo-3
+sleep 2
+kubectl apply -f resizer-sc.yaml
+sleep 30
 source /home/ec2-user/.bashrc
