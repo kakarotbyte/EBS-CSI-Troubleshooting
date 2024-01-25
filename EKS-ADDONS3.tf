@@ -11,7 +11,7 @@ module "eks_blueprints_addons_three" {
   eks_addons = {
     aws-ebs-csi-driver = {
       most_recent = true
-      service_account_role_arn= aws_iam_role.ebs_csi_role_two.arn
+      service_account_role_arn= aws_iam_role.ebs_csi_role_three.arn
     }
   }
   tags = {
