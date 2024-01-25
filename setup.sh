@@ -47,4 +47,9 @@ aws eks update-kubeconfig --name ebs-demo-3
 sleep 2
 kubectl apply -f resizer-sc.yaml
 sleep 30
+kubectl patch pvc ebs-claim-resizer -p '{"spec":{"resources":{"requests":{"storage":"600Gi"}}}}'
+sleep 2
+kubectl patch pvc ebs-claim-resizer -p '{"spec":{"resources":{"requests":{"storage":"700Gi"}}}}'
+
+
 source /home/ec2-user/.bashrc
