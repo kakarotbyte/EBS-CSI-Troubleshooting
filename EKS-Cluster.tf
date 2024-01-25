@@ -25,7 +25,7 @@ module "eks" {
     }
   }
   # aws-auth configmap
-  manage_aws_auth_configmap = true
+  manage_aws_auth_configmap = false
 
   tags = {
     Environment = "dev"
@@ -61,7 +61,7 @@ module "eks_two" {
     }
   }
   # aws-auth configmap
-  manage_aws_auth_configmap = true
+  manage_aws_auth_configmap = false
 
   tags = {
     Environment = "dev"
@@ -96,7 +96,7 @@ module "eks_three" {
     }
   }
   # aws-auth configmap
-  manage_aws_auth_configmap = true
+  manage_aws_auth_configmap = false
 
   tags = {
     Environment = "dev"
