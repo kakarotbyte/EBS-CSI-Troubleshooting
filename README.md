@@ -1,2 +1,33 @@
 # EBS-CSI-Troubleshooting
 EBS-CSI-Troubleshooting
+
+CSI node Command:
+
+```
+kubectl get csinode
+```
+
+Get volume attachment command:
+
+```
+kubectl get VolumeAttachment
+```
+
+
+pod and SA Mapping:
+
+```
+kubectl get pods -o custom-columns='podname:metadata.name,Serviceaccountname:spec.serviceAccountName' -n kube-system
+```
+
+get nodes command to show Node name, AZ, Version, EBS Volumes attached by CSI, InstanceID:
+
+```
+kubectl get nodes -o custom-columns='NAME:metadata.name,Zone:metadata.labels.topology\.ebs\.csi\.aws\.com/zone,Version:status.nodeInfo.kubeletVersion,Volumesattached:status.volumesAttached[*].name,InstanceID:spec.providerID'
+```
+
+Get all RBAC relevant to ebs
+
+```
+kubectl get clusterrolebindings -o custom-columns='NAME:metadata.name,USER:subjects[?(@.kind=="User")].name,GROUP:subjects[?(@.kind=="Group")].name,ServiceAccount:subjects[?(@.kind=="ServiceAccount")].name,Kind:roleRef.kind,role:roleRef.name' -A| grep ebs
+```
